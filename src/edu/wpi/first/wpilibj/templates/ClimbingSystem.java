@@ -39,8 +39,6 @@ public class ClimbingSystem
     {
         try 
         {
-            winch2 = new CANJaguar(1);
-            
             up = new Solenoid(Wiring.CLIMB_SOLENOID_UP);
             down = new Solenoid(Wiring.CLIMB_SOLENOID_DOWN);
             forward = new Solenoid(Wiring.CLIMBING_SOLENOID_FORWARD);
@@ -50,7 +48,9 @@ public class ClimbingSystem
             
             max = new DigitalInput(Wiring.CYLINDER_MAX);
             winch = new CANJaguar(Wiring.WINCH_MOTOR);
+            winch2 = new CANJaguar(Wiring.WINCH2_MOTOR);
             winch.configMaxOutputVoltage(6.0);
+            winch2.configMaxOutputVoltage(6.0);
             forward.set(true);
             back.set(false);
             this.robo = robo;
@@ -163,6 +163,8 @@ public class ClimbingSystem
                     {
                         System.out.println("$$$$$$$$$$$$$$$$$$$$$$$$$ GOT TO MAX $$$$$$$$$$$$$$$$$$$$");
                         winch.setX(0.0);
+                        winch2.setX(0.0, sg);
+                        winch.updateSyncGroup(sg);
                         break;
                     }  
                 }
@@ -188,6 +190,7 @@ public class ClimbingSystem
             up.set(true);
             down.set(false);
             winch.setX(upspeed, sg);
+            winch2.setX(upspeed, sg);
             winch.updateSyncGroup(sg);
             
             while(true)
