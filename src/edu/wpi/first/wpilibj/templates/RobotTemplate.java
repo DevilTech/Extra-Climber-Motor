@@ -1,4 +1,4 @@
-//Threaded WITH extra motor for climbing
+//Threaded WITH extra motor for climbing, no change for climbing logic yet
 package edu.wpi.first.wpilibj.templates;
 
 import edu.wpi.first.wpilibj.*;
